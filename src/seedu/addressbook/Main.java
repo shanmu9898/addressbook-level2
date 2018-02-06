@@ -14,7 +14,8 @@ import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import seedu.addressbook.ui.TextUi;
-
+import static seedu.addressbook.common.Messages.MESSAGE_STORAGE_ERROR;
+import seedu.addressbook.storage.StorageFile.StorageWriteException;
 
 /**
  * Entry point of the Address Book application.
@@ -111,7 +112,10 @@ public class Main {
             CommandResult result = command.execute();
             storage.save(addressBook);
             return result;
-        } catch (Exception e) {
+        }catch (StorageWriteException swe) {
+            return new CommandResult(MESSAGE_STORAGE_ERROR);
+        }
+        catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
