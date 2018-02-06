@@ -12,7 +12,7 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String value;
+    public String value = "";
     private boolean isPrivate;
 
     /**
@@ -27,32 +27,34 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         String[] splitFormOfAddress = trimmedAddress.split(",");
-        Block blockAddress = new Block(" ");
-        Street streetAddess = new Street(" ");
-        Unit unitAddress = new Unit(" ");
-        PostalCode postalCode = new PostalCode("1234");
+        Block blockAddress ;
+        Street streetAddess ;
+        Unit unitAddress;
+        PostalCode postalCode;
 
         if(splitFormOfAddress.length == 4 ){
              blockAddress = new Block(splitFormOfAddress[0]);
              streetAddess = new Street(splitFormOfAddress[1]);
              unitAddress = new Unit(splitFormOfAddress[2]);
-             postalCode = new PostalCode(splitFormOfAddress[3].trim());
-
+             postalCode = new PostalCode(splitFormOfAddress[3]);
+            this.value = blockAddress.getBlockNumber()+"," +streetAddess.getStreetAddress()+"," + unitAddress.getUnitAddress() +"," +postalCode.getPostalCode();
         }else if (splitFormOfAddress.length ==3){
              blockAddress = new Block(splitFormOfAddress[0]);
              streetAddess = new Street(splitFormOfAddress[1]);
              unitAddress = new Unit(splitFormOfAddress[2]);
+            this.value = blockAddress.getBlockNumber()+"," +streetAddess.getStreetAddress()+"," + unitAddress.getUnitAddress();
         }else if (splitFormOfAddress.length == 2){
              blockAddress = new Block(splitFormOfAddress[0]);
              streetAddess = new Street(splitFormOfAddress[1]);
+            this.value = blockAddress.getBlockNumber()+"," +streetAddess.getStreetAddress();
         }else if (splitFormOfAddress.length == 1){
              blockAddress = new Block(splitFormOfAddress[0]);
+            this.value = blockAddress.getBlockNumber();
         }else{
 
         }
 
-        this.value = "Block Address:- " + blockAddress.getBlockNumber()+ " Street Address:- "+ streetAddess.getStreetAddress()
-                       + " Unit Address:- "+ unitAddress.getUnitAddress() + " Postalcode:- "+ postalCode.getPostalCode();
+        //this.value = blockAddress.getBlockNumber()+"," +streetAddess.getStreetAddress()+"," + unitAddress.getUnitAddress() +"," +postalCode.getPostalCode();
     }
 
     /**
