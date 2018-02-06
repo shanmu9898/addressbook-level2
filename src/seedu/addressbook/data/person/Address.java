@@ -8,7 +8,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
+    public static final String EXAMPLE = "123, some street,some unit,some postalcode";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
@@ -26,7 +26,33 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
+        String[] splitFormOfAddress = trimmedAddress.split(",");
+        Block blockAddress = new Block(" ");
+        Street streetAddess = new Street(" ");
+        Unit unitAddress = new Unit(" ");
+        PostalCode postalCode = new PostalCode("1234");
+
+        if(splitFormOfAddress.length == 4 ){
+             blockAddress = new Block(splitFormOfAddress[0]);
+             streetAddess = new Street(splitFormOfAddress[1]);
+             unitAddress = new Unit(splitFormOfAddress[2]);
+             postalCode = new PostalCode(splitFormOfAddress[3].trim());
+
+        }else if (splitFormOfAddress.length ==3){
+             blockAddress = new Block(splitFormOfAddress[0]);
+             streetAddess = new Street(splitFormOfAddress[1]);
+             unitAddress = new Unit(splitFormOfAddress[2]);
+        }else if (splitFormOfAddress.length == 2){
+             blockAddress = new Block(splitFormOfAddress[0]);
+             streetAddess = new Street(splitFormOfAddress[1]);
+        }else if (splitFormOfAddress.length == 1){
+             blockAddress = new Block(splitFormOfAddress[0]);
+        }else{
+
+        }
+
+        this.value = "Block Address:- " + blockAddress.getBlockNumber()+ " Street Address:- "+ streetAddess.getStreetAddress()
+                       + " Unit Address:- "+ unitAddress.getUnitAddress() + " Postalcode:- "+ postalCode.getPostalCode();
     }
 
     /**
