@@ -87,6 +87,24 @@
   viewall 5
 
 ##########################################################
+# test tagged persons command
+##########################################################
+
+  # should catch invalid args format
+  tagged t/duplicate
+
+
+
+  # should catch invalid multiple tags
+  tagged hello bye
+  tagged owesmoney friend
+
+  # should show all people with a certain tag
+  tagged tubers
+  tagged friends
+
+
+##########################################################
 # test find persons command
 ##########################################################
 
