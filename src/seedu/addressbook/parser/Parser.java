@@ -31,8 +31,7 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
-    //public static final Pattern TAGGED_DATA_ARGS_FORMAT = Pattern.compile("(?<tag>[^/])");
-
+    
     /**
      * Signals that the user input could not be parsed.
      */
