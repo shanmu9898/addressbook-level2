@@ -31,7 +31,7 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
-    
+
     /**
      * Signals that the user input could not be parsed.
      */

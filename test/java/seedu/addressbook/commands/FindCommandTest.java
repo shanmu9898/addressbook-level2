@@ -25,8 +25,8 @@ public class FindCommandTest {
         //same word, same case: matched
         assertFindCommandBehavior(new String[]{"Amy"}, Arrays.asList(td.amy));
 
-        //same word, different case: not matched
-        assertFindCommandBehavior(new String[]{"aMy"}, Collections.emptyList());
+        //same word, different case: even then matched
+        assertFindCommandBehavior(new String[]{"aMy"}, Arrays.asList(td.amy));
 
         //partial word: not matched
         assertFindCommandBehavior(new String[]{"my"}, Collections.emptyList());
@@ -44,7 +44,7 @@ public class FindCommandTest {
 
     /**
      * Executes the find command for the given keywords and verifies
-     * the result matches the persons in the expectedPersonList exactly.
+     * the result matches the persons in the expectedPersonList exactly(with the exception of case senstivity).
      */
     private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList) {
         FindCommand command = createFindCommand(keywords);
